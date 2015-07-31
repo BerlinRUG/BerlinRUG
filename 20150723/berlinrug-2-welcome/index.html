@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>2. Meetup of the Berlin R Users Group</title>
+  <meta charset="utf-8">
+  <meta name="description" content="2. Meetup of the Berlin R Users Group">
+  <meta name="author" content="Konstantin Greger">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+      <slide class="nobackground">
+    <article class="flexbox vcenter">
+      <span>
+        <img width='300px' src="assets/img/Rlogo.png">
+      </span>
+    </article>
+  </slide>
+    <slide class="title-slide segue nobackground" style="background-color:#FFFFFF">
+  <aside class="gdbar">
+    <img src="assets/img/Rlogo.png">
+  </aside>
+  <hgroup class="auto-fadein">
+    <h1>2. Meetup of the Berlin R Users Group</h1>
+    <h2>2015-07-23 @ Microsoft Berlin Digital Eatery (Berlin, DE)</h2>
+    <p>Konstantin Greger<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Schedule for today</h2>
+  </hgroup>
+  <article data-timings="">
+    <table><thead>
+<tr>
+<th>Time</th>
+<th>What&#39;s happening</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>19:00</td>
+<td>doors open</td>
+</tr>
+<tr>
+<td>19:15</td>
+<td>Konstantin Greger (<a href="https://twitter.com/kogreger">@kogreger</a>): &quot;Welcome address and brief introduction&quot;</td>
+</tr>
+<tr>
+<td>19:20</td>
+<td>Berry Boessenkool (<a href="https://twitter.com/berryboessenkoo">@berryboessenkoo</a>): &quot;Shiny Apps for Interactive Graphics&quot;</td>
+</tr>
+<tr>
+<td>19:35</td>
+<td>Rick Scavetta (<a href="https://twitter.com/rick_scavetta">@Rick_Scavetta</a>): &quot;Some New Data Vis Tools in R - visR! 2015&quot;</td>
+</tr>
+<tr>
+<td>19:50</td>
+<td>Konstantin Greger (<a href="https://twitter.com/kogreger">@kogreger</a>): &quot;Spatial Analysis in R&quot;</td>
+</tr>
+<tr>
+<td>from ~20:05</td>
+<td>socializing &amp; networking</td>
+</tr>
+<tr>
+<td>22:00</td>
+<td>doors close</td>
+</tr>
+</tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Our group sponsors</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div style='float:left;width:48%;' class='centered'>
+  <p><img src="assets/fig/leftSponsor-1.png" alt="plot of chunk leftSponsor"> </p>
+
+</div>
+<div style='float:right;width:48%;'>
+  <p><img src="assets/fig/rightSponsor-1.png" alt="plot of chunk rightSponsor"> </p>
+
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Number of group members</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="assets/fig/groupStats-1.png" alt="plot of chunk groupStats"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>distributed matters @Berlin (Sept 18-19)</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>10th anniversary event of NoSQL matters. Adding several new topics to the theme and rebranding to distributed matters.
+The conference covers topics like: Distributed systems, Microservices, DCOS, Cloud Management, Database solutions, DevOp operations and, of course, NoSQL and Big Data.</p>
+
+<p>Training day (18.09.15) -&gt; <a href="http://bit.ly/BERtrainigs">http://bit.ly/BERtrainigs</a>
+Conference day (19.09.15) -&gt; <a href="http://bit.ly/BER_Home">http://bit.ly/BER_Home</a></p>
+
+<p>Conference day will be opened by the legendary KYLE KINGSBURY (<a href="https://twitter.com/aphyr">@aphyr</a> - the author of “Call Me Maybe” project).
+Followed by Salvatore Sanfilippo (Pivotal), Charity Majors (Parse / Facebook), Oliver Hardt (Bitly), Joe Nash (Braintree/PayPal) and more.</p>
+
+<p>Get your special discounted Early Bird ticket (1 day conf) or Early Bird Combi (training day + conf) until 26th July 2015 -&gt; <a href="http://bit.ly/BERtickets">http://bit.ly/BERtickets</a></p>
+
+<p>After 26th July use the code &quot;BerlinR_UG_2015&quot;&quot; to get 20% off.</p>
+
+<p>!! Raffle for 1 FREE TICKET for BerlinRUG members -&gt; send message to <a href="mailto:kogreger@gmail.com">Konstantin</a> by 31st July to be eligible !!</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>EARL 2015 Conference London (Sept 14-16)</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Effective Applications of the R Language</p>
+
+<p>2015 Keynote Speakers: Alex Bellos, Joe Cheng, Dirk Eddelbuettel and Hannah Fry</p>
+
+<p>Register at <a href="http://www.earl-conference.com/">http://www.earl-conference.com/</a> and follow <a href="https://twitter.com/earlconf">@earlconf</a></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>useR! Conference 2015</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="assets/fig/userTweet-1.png" alt="plot of chunk userTweet"> </p>
+
+<p>More stats and insights in <a href="http://blog.revolutionanalytics.com/2015/07/planning-of-and-some-stats-from-user-2015-aalborg.html">excellent blog post by Torben Tvedebrink (chair of local committee, useR! 2015)</a></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>On R User Groups</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Joe Rickert (Microsoft): <a href="http://user2015.math.aau.dk/presentations/121.pdf"><em>&quot;R User Groups - Building Community at the Local Level&quot;</em></a></p>
+
+<p>What does it take for a group of people to be a community?</p>
+
+<ul>
+<li>Intentional involvement</li>
+<li>A shared set of positive goals</li>
+<li>Interactions that take place over time</li>
+<li>Committed members</li>
+<li>Contributions to the general welfare</li>
+</ul>
+
+<p>Thomas Lumley (R Core): &quot;R is a free software <em>community</em> for statistical computing and graphics&quot;</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Schedule for today</h2>
+  </hgroup>
+  <article data-timings="">
+    <table><thead>
+<tr>
+<th>Time</th>
+<th>What&#39;s happening</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>19:00</td>
+<td>doors open</td>
+</tr>
+<tr>
+<td>19:15</td>
+<td>Konstantin Greger (<a href="https://twitter.com/kogreger">@kogreger</a>): &quot;Welcome address and brief introduction&quot;</td>
+</tr>
+<tr>
+<td>19:20</td>
+<td>Berry Boessenkool (<a href="https://twitter.com/berryboessenkoo">@berryboessenkoo</a>): &quot;Shiny Apps for Interactive Graphics&quot;</td>
+</tr>
+<tr>
+<td>19:35</td>
+<td>Rick Scavetta (<a href="https://twitter.com/rick_scavetta">@Rick_Scavetta</a>): &quot;Some New Data Vis Tools in R - visR! 2015&quot;</td>
+</tr>
+<tr>
+<td>19:50</td>
+<td>Konstantin Greger (<a href="https://twitter.com/kogreger">@kogreger</a>): &quot;Spatial Analysis in R&quot;</td>
+</tr>
+<tr>
+<td>from ~20:05</td>
+<td>socializing &amp; networking</td>
+</tr>
+<tr>
+<td>22:00</td>
+<td>doors close</td>
+</tr>
+</tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Schedule for today'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Our group sponsors'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Number of group members'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='distributed matters @Berlin (Sept 18-19)'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='EARL 2015 Conference London (Sept 14-16)'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='useR! Conference 2015'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='On R User Groups'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='Schedule for today'>
+         8
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>

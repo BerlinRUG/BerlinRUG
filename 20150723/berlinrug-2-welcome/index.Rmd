@@ -1,0 +1,211 @@
+---
+title       : 2. Meetup of the Berlin R Users Group
+subtitle    : 2015-07-23 @ Microsoft Berlin Digital Eatery (Berlin, DE)
+author      : Konstantin Greger
+job         : 
+logo        : Rlogo.png
+biglogo     : Rlogo.png
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+## Schedule for today
+
+Time|What's happening
+-------|-------
+19:00|doors open
+19:15|Konstantin Greger ([@kogreger](https://twitter.com/kogreger)): "Welcome address and brief introduction"
+19:20|Berry Boessenkool ([@berryboessenkoo](https://twitter.com/berryboessenkoo)): "Shiny Apps for Interactive Graphics"
+19:35|Rick Scavetta ([@Rick_Scavetta](https://twitter.com/rick_scavetta)): "Some New Data Vis Tools in R - visR! 2015"
+19:50|Konstantin Greger ([@kogreger](https://twitter.com/kogreger)): "Spatial Analysis in R"
+from ~20:05|socializing & networking
+22:00|doors close
+
+```{r initialize, echo = FALSE, message = FALSE, cache = FALSE}
+# initialize libraries
+suppressMessages(library(slidify))
+suppressMessages(library(googlesheets))
+suppressMessages(library(ggplot2))
+suppressMessages(library(grid))
+suppressMessages(library(jpeg))
+suppressMessages(library(dplyr))
+suppressMessages(library(png))
+suppressMessages(library(readr))
+suppressMessages(library(reshape2))
+suppressMessages(library(stringr))
+
+
+# group stats from meetup.com
+# (currently the user stats are not downloadable automatically)
+# (also, while the file has an .XLS extension it's actually a horribly 
+#  formatted .TSV!)
+## download and preprocess
+memberStats <- read_tsv("../Berlin_R_Users_Group_Total_and_Active_Members.xls", 
+                  col_types = "ccc") %>% 
+    rename(date = `Date `, 
+           total = `Total Members `, 
+           active = `Active Members`) %>% 
+    mutate(date = str_trim(date), 
+           date = as.Date(date, format = "%Y-%m-%d"), 
+           total = str_trim(total), 
+           total = as.integer(total), 
+           active = as.integer(active)) %>% 
+    filter(!is.na(date))
+## extract highest membership data
+maxMembers <- data.frame(
+    date = memberStats$date[which.max(memberStats$total)], 
+    members = c(max(memberStats$total))
+)
+## combine total and active membership data
+memberStats <- melt(memberStats, 
+                    id.vars = "date", 
+                    value.name = "members", 
+                    variable.name = "status")
+## create milestones
+milestones <- data.frame(
+    date = as.Date(c("2015-01-05", 
+                     "2015-05-04", 
+                     "2015-05-10", 
+                     "2015-05-29", 
+                     "2015-06-24", 
+                     "2015-06-30"), 
+                   format = "%Y-%m-%d"), 
+    event = c("group founded", 
+              "leadership changed", 
+              "reboot announced\n@BerlinRUG started", 
+              "first meetup scheduled", 
+              "1. Meetup", 
+              "second meetup scheduled"), 
+    stringsAsFactors = FALSE
+)
+```
+
+--- .class #id &twocol
+
+## Our group sponsors
+
+*** =left
+
+```{r leftSponsor, echo = FALSE, cache = FALSE, fig.width = 6, fig.height = 6}
+img <- readJPEG("./assets/img/RAlogo.jpg")
+grid.raster(img)
+```
+
+*** =right
+
+```{r rightSponsor, echo = FALSE, cache = FALSE, fig.width = 6, fig.height = 6}
+img <- readPNG("./assets/img/MSlogo.png")
+grid.raster(img)
+```
+
+--- .class #id 
+
+## Number of group members
+
+```{r groupStats, echo = FALSE, cache = FALSE, dpi = 72, fig.width = 14, fig.height = 7, dev.args = list(bg = 'transparent')}
+## member stats
+ggplot(data = memberStats) + 
+    geom_line(aes(x = date, 
+                  y = members, 
+                  group = status, 
+                  color = status)) + 
+    scale_color_brewer(palette = "Set1") + 
+    labs(list(x = "", 
+              y = "Members", 
+              color = "Member status")) + 
+    geom_vline(aes(xintercept = as.numeric(date)), 
+               data = milestones, 
+               linetype = "dashed") + 
+    geom_text(aes(x = date, 
+                  y = 100, 
+                  label = event), 
+              data = milestones, 
+              angle = 90, 
+              vjust = 1, 
+              hjust = 1, 
+              size = 4) + 
+    geom_point(aes(x = date, 
+                   y = members), 
+               data = maxMembers, 
+               size = 3) + 
+    theme_bw(base_size = 25) + 
+    theme(panel.border = element_blank(), 
+          plot.background = element_rect(fill = "transparent", 
+                                         color = NA), 
+          legend.key = element_rect(color = NA), 
+          legend.key.size = unit(2, "lines"))
+```
+
+--- .class #id 
+
+## distributed matters @Berlin (Sept 18-19)
+
+10th anniversary event of NoSQL matters. Adding several new topics to the theme and rebranding to distributed matters.
+The conference covers topics like: Distributed systems, Microservices, DCOS, Cloud Management, Database solutions, DevOp operations and, of course, NoSQL and Big Data.
+
+Training day (18.09.15) -> [http://bit.ly/BERtrainigs](http://bit.ly/BERtrainigs)
+Conference day (19.09.15) -> [http://bit.ly/BER_Home](http://bit.ly/BER_Home)
+ 
+Conference day will be opened by the legendary KYLE KINGSBURY ([@aphyr](https://twitter.com/aphyr) - the author of “Call Me Maybe” project).
+Followed by Salvatore Sanfilippo (Pivotal), Charity Majors (Parse / Facebook), Oliver Hardt (Bitly), Joe Nash (Braintree/PayPal) and more.
+ 
+Get your special discounted Early Bird ticket (1 day conf) or Early Bird Combi (training day + conf) until 26th July 2015 -> [http://bit.ly/BERtickets](http://bit.ly/BERtickets)
+ 
+After 26th July use the code "BerlinR_UG_2015"" to get 20% off.
+
+!! Raffle for 1 FREE TICKET for BerlinRUG members -> send message to [Konstantin](mailto:kogreger@gmail.com) by 31st July to be eligible !!
+
+--- .class #id 
+
+## EARL 2015 Conference London (Sept 14-16)
+
+Effective Applications of the R Language
+
+2015 Keynote Speakers: Alex Bellos, Joe Cheng, Dirk Eddelbuettel and Hannah Fry
+
+Register at [http://www.earl-conference.com/](http://www.earl-conference.com/) and follow [@earlconf](https://twitter.com/earlconf)
+
+--- .class #id
+
+## useR! Conference 2015
+
+```{r userTweet, echo = FALSE, cache = FALSE, fig.width = 12, fig.height = 6}
+img <- readPNG("./assets/img/userTweet.png")
+grid.raster(img)
+```
+
+More stats and insights in [excellent blog post by Torben Tvedebrink (chair of local committee, useR! 2015)](http://blog.revolutionanalytics.com/2015/07/planning-of-and-some-stats-from-user-2015-aalborg.html)
+
+--- .class #id 
+
+## On R User Groups
+
+Joe Rickert (Microsoft): [*"R User Groups - Building Community at the Local Level"*](http://user2015.math.aau.dk/presentations/121.pdf)
+
+What does it take for a group of people to be a community?
+* Intentional involvement
+* A shared set of positive goals
+* Interactions that take place over time
+* Committed members
+* Contributions to the general welfare
+
+
+Thomas Lumley (R Core): "R is a free software *community* for statistical computing and graphics"
+
+--- .class #id 
+
+## Schedule for today
+
+Time|What's happening
+-------|-------
+19:00|doors open
+19:15|Konstantin Greger ([@kogreger](https://twitter.com/kogreger)): "Welcome address and brief introduction"
+19:20|Berry Boessenkool ([@berryboessenkoo](https://twitter.com/berryboessenkoo)): "Shiny Apps for Interactive Graphics"
+19:35|Rick Scavetta ([@Rick_Scavetta](https://twitter.com/rick_scavetta)): "Some New Data Vis Tools in R - visR! 2015"
+19:50|Konstantin Greger ([@kogreger](https://twitter.com/kogreger)): "Spatial Analysis in R"
+from ~20:05|socializing & networking
+22:00|doors close
