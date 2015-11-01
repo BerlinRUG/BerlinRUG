@@ -1,0 +1,13 @@
+base
+knitr
+housingData
+datadr
+lattice
+ggplot2
+trelliscope
+tmap
+MASS
+RColorBrewer
+oaColors
+oaPlots
+dendextend
