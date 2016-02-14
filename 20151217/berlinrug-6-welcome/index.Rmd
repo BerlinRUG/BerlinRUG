@@ -1,0 +1,219 @@
+---
+title       : 6. Meetup of Berlin R Users Group - "Method Comparison Studies (MCS)"
+subtitle    : 2015-12-17 @ Hypoport (Berlin, DE)
+author      : Konstantin Greger
+job         : 
+logo        : Rlogo.png
+biglogo     : Rlogo.png
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+## Schedule for today
+
+Time|What's happening
+-------|-------
+18:30|doors open
+19:15|Konstantin Greger ([@kogreger](https://twitter.com/kogreger)): "Welcome and Brief Introduction"
+19:20|Jens Hanack ([@hypoport](https://twitter.com/hypoport)): "Welcome to Hypoport"
+19:25|Open Mic!
+19:30|Kevin O'Brien (University of Limerick; [@kobriendublin](https://twitter.com/kobriendublin)): "Method Comparison Studies with R: A whistlestop tour of methods and techniques for one of the most commonly encountered problems in sciences"
+from ~20:45|socializing & networking
+22:00|doors close
+
+```{r initialize, echo = FALSE, message = FALSE, cache = FALSE}
+# initialize libraries
+suppressMessages(library(slidify))
+suppressMessages(library(googlesheets))
+suppressMessages(library(ggplot2))
+suppressMessages(library(grid))
+suppressMessages(library(jpeg))
+suppressMessages(library(dplyr))
+suppressMessages(library(png))
+suppressMessages(library(readr))
+suppressMessages(library(reshape2))
+suppressMessages(library(stringr))
+
+
+# group stats from meetup.com
+# (currently the user stats are not downloadable automatically)
+# (also, while the file has an .XLS extension it's actually a horribly 
+#  formatted .TSV!)
+## download and preprocess
+memberStats <- read_tsv("../Berlin_R_Users_Group_Total_and_Active_Members.xls", 
+                  col_types = "ccc") %>% 
+    rename(date = `Date `, 
+           total = `Total Members `, 
+           active = `Active Members`) %>% 
+    mutate(date = str_trim(date), 
+           date = as.Date(date, format = "%Y-%m-%d"), 
+           total = str_trim(total), 
+           total = as.integer(total), 
+           active = as.integer(active)) %>% 
+    filter(!is.na(date))
+## extract highest membership data
+maxMembers <- data.frame(
+    date = memberStats$date[which.max(memberStats$total)], 
+    members = c(max(memberStats$total))
+)
+## combine total and active membership data
+memberStats <- melt(memberStats, 
+                    id.vars = "date", 
+                    value.name = "members", 
+                    variable.name = "status")
+## create milestones
+milestones <- data.frame(
+    date = as.Date(c("2015-01-05", 
+                     "2015-05-04", 
+                     "2015-05-10", 
+                     "2015-05-29", 
+                     "2015-06-24", 
+                     "2015-06-30", 
+                     "2015-07-23", 
+                     "2015-09-14", 
+                     "2015-09-24", 
+                     "2015-10-20", 
+                     "2015-10-29", 
+                     "2015-11-17", 
+                     "2015-11-19", 
+                     "2015-12-04"), 
+                   format = "%Y-%m-%d"), 
+    event = c("group founded", 
+              "leadership changed", 
+              "reboot announced\n@BerlinRUG started", 
+              "first meetup scheduled", 
+              "1. Meetup", 
+              "second meetup scheduled", 
+              "2. Meetup", 
+              "third meetup schedulded", 
+              "3. Meetup", 
+              "fourth meetup schedulded", 
+              "4. Meetup", 
+              "fifth meetup scheduled", 
+              "5. Meetup", 
+              "sixth meetup scheduled"), 
+    stringsAsFactors = FALSE
+)
+```
+
+--- .class #id 
+
+## Number of group members
+
+```{r groupStats, echo = FALSE, cache = FALSE, dpi = 72, fig.width = 14, fig.height = 7, dev.args = list(bg = 'transparent')}
+## member stats
+ggplot(data = memberStats) + 
+    geom_line(aes(x = date, 
+                  y = members, 
+                  group = status, 
+                  color = status)) + 
+    scale_color_brewer(palette = "Set1") + 
+    labs(list(x = "", 
+              y = "Members", 
+              color = "Member status")) + 
+    geom_vline(aes(xintercept = as.numeric(date)), 
+               data = milestones, 
+               linetype = "dashed") + 
+    geom_text(aes(x = date, 
+                  y = 310, 
+                  label = event), 
+              data = milestones, 
+              angle = 90, 
+              vjust = 1, 
+              hjust = 1, 
+              size = 4) + 
+    geom_point(aes(x = date, 
+                   y = members), 
+               data = maxMembers, 
+               size = 3) + 
+    theme_bw(base_size = 25) + 
+    theme(panel.border = element_blank(), 
+          plot.background = element_rect(fill = "transparent", 
+                                         color = NA), 
+          legend.key = element_rect(color = NA), 
+          legend.key.size = unit(2, "lines"))
+```
+
+--- .class #id 
+
+## Call for Presenters
+
+time series analysis, own packages, modelling count variables, binary logistic modelling with R, data manipulation with dplyr (with magrittr), data visualization with ggvis, making maps with R, introduction to survival analysis with R, logistic regression modelling with R - beyond binary (multinomial and ordinal logistic regression), shiny dashboard, propensity score matching studies, dplyr, ggvis, possibly some of the work I've done with web scraping, network analysis, information visualization, maps and spatial analysis in R, R in the social sciences, basic introduction to dplyr, data mining in R, ODE based models of phytoplankton growth, overview of glmnet, applications of using R in my job environment, R introductionary course, writing functions in R is actually fairly easy, R + knitr + LaTeX: much stronger than Office Word (claim and proof), *apply is the best thing since sliced bread, why you should write a package - and how, modelling election outcomes, discrete choice modeling, bayesian statistics, quantitative marketing/economics, reproducibility in environmental modelling
+
+Just contact me: [kogreger@gmail.com](mailto:kogreger@gmail.com)
+
+--- .class #id 
+
+## Important Links
+
+Participate in our group survey here: [http://bit.ly/BerlinRUG_Member_Survey](http://bit.ly/BerlinRUG_Member_Survey)
+
+Have a look at our group repository here: [http://kogreger.github.io/BerlinRUG](http://kogreger.github.io/BerlinRUG)
+
+Get the latest news via Twitter: [@BerlinRUG](https://twitter.com/BerlinRUG)
+
+User Group hashtag: [#BerlinRUG](https://twitter.com/hashtag/BerlinRUG?src=hash)
+
+--- .class #id &twocol
+
+## Our group sponsors
+
+*** =left
+
+```{r leftSponsor, echo = FALSE, cache = FALSE, fig.width = 6, fig.height = 6}
+img <- readJPEG("./assets/img/RAlogo.jpg")
+grid.raster(img)
+```
+
+*** =right
+
+```{r rightSponsor, echo = FALSE, cache = FALSE, fig.width = 6, fig.height = 6}
+img <- readPNG("./assets/img/Hypoportlogo.png")
+grid.raster(img)
+```
+
+--- .class #id bg:url(./assets/img/openmic.jpg)
+
+## Open Mic!
+
+<div style="font-size:50%; position:fixed; bottom:10px; left:10px; ">"SennMicrophone" by ChrisEngelsma - Own work. Licensed under CC BY-SA 3.0 via Commons<br>https://commons.wikimedia.org/wiki/File:SennMicrophone.jpg#/media/File:SennMicrophone.jpg</div>
+
+--- .class #id 
+
+## Schedule for today
+
+Time|What's happening
+-------|-------
+18:30|doors open
+19:15|Konstantin Greger ([@kogreger](https://twitter.com/kogreger)): "Welcome and Brief Introduction"
+19:20|Jens Hanack ([@hypoport](https://twitter.com/hypoport)): "Welcome to Hypoport"
+19:25|Open Mic!
+19:30|Kevin O'Brien (University of Limerick; [@kobriendublin](https://twitter.com/kobriendublin)): "Method Comparison Studies with R: A whistlestop tour of methods and techniques for one of the most commonly encountered problems in sciences"
+from ~20:45|socializing & networking
+22:00|doors close
+
+--- .class #id 
+
+## A neRdy gReeting
+
+```{r, eval = FALSE}
+set.seed(31612310)
+paste(sample(letters,5,T), collapse='')
+set.seed(12353); sample(0:9,4,T)
+```
+
+--- .class #id 
+
+## A neRdy gReeting
+
+```{r}
+set.seed(31612310)
+paste(sample(letters,5,T), collapse='')
+set.seed(12353); sample(0:9,4,T)
+```
+
+Thanks, [Berry](https://twitter.com/berryboessenkoo)!
